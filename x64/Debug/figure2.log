@@ -1,0 +1,7 @@
+﻿  figure2.cpp
+C:\Users\newya\source\repos\figure2\figure2.cpp(131,10): warning C4101: Rh: неиспользованная локальная переменная
+C:\Users\newya\source\repos\figure2\figure2.cpp(130,16): warning C4101: Pl: неиспользованная локальная переменная
+C:\Users\newya\source\repos\figure2\figure2.cpp(129,9): warning C4101: Sq: неиспользованная локальная переменная
+C:\Users\newya\source\repos\figure2\figure2.cpp(128,12): warning C4101: Re: неиспользованная локальная переменная
+C:\Users\newya\source\repos\figure2\figure2.cpp(127,16): warning C4101: Ql: неиспользованная локальная переменная
+  figure2.vcxproj -> C:\Users\newya\source\repos\figure2\x64\Debug\figure2.exe
