@@ -1,4 +1,4 @@
-﻿// figure2.cpp : 
+﻿// figure2.cpp : 90
 //nazaroveg@yandex.ru
 
 #include <iostream>
@@ -7,17 +7,17 @@
 class triangle  //треугольник
 {
 public:
-	triangle(int,int,int,int,int,int)
-	{
-		
-	}
-	triangle(){}
+	triangle() {}
+	triangle(int, int, int, int, int, int){}
+	
+
+
 	std::string get_name() const
 	{
 		return name;
 	}
 
-	void print_info(triangle* res, std::string name)
+	void print_info(triangle* res, std::string name )
 	{
 		std::cout << name << std::endl;
 		std::cout << "Стороны: " << Length_a << " " << Length_b << " " << Length_c << " " << std::endl;
@@ -29,33 +29,63 @@ private:
 protected:
 	int corner_a = 50, corner_b = 60, corner_c = 70;
 	int Length_a = 10, Length_b = 20, Length_c = 30;
-	std::string name = {"Треугольник:"};
+	std::string name = { "Треугольник:" };
 	
 };
 
-class Right_triangle : protected triangle  // прямоугольный треугольник  один 90 гр
+class Right_triangle : public triangle  // прямоугольный треугольник  один 90 гр
 {
 public:
-	Right_triangle(){}
+	
+	
+	Right_triangle(int, int, int, int, int)
+	{
+		corner_a, corner_b, Length_a, Length_b, Length_c;
+	}
+	std::string const name = "прямоугольный треугольник:";
+	
+
+	std::string get_name() const
+	{
+		return name;
+	}
 
 private:
 
 protected:
 
 };
-class Isosceles_triangle : protected triangle  //Равнобедренный треугольник 2 ст =
+class Isosceles_triangle : public triangle  //Равнобедренный треугольник 2 ст =
 {
 public:
-	Isosceles_triangle(int, int,int ,int,int,int){ }
-	Isosceles_triangle(){}
+	
+	
+	
+	 std::string const name =  "Равнобедренный треугольник:" ;
+	
+	
+	 std::string get_name() const
+	{
+		 return name;
+	}
+
+	
 private:
 
 protected:
 
 };
-class Equilateral_triangle : protected triangle //Равносторонний треугольник  всё равно
+class Equilateral_triangle : public triangle //Равносторонний треугольник  всё равно
 {
 public:
+	
+	
+	std::string name = "Равносторонний треугольник:";
+
+	std::string get_name() const
+	{
+		return name;
+	}
 
 private:
 
@@ -121,8 +151,9 @@ int main()
 {
 	setlocale(LC_ALL, "RUS");
 
-	triangle tr {50,60,70,10,20,30};
-	Isosceles_triangle It {50,60,90,10,20,30};
+	triangle tr {10 20 30 50 90 80 };
+	//Right_triangle Rt {10,20,90,10};
+	//Isosceles_triangle It {10,20,10,40,50};
 	Equilateral_triangle Et{};
 	Quadrilateral Ql;
 	Rectangle Re;
@@ -132,8 +163,9 @@ int main()
 
 	
 	tr.print_info(&tr, tr.get_name());
-	
-
+	//Rt.print_info(&Rt, *&Rt.get_name());
+	//It.print_info(&It, It.get_name());
+	//Et.print_info(&Et, Et.get_name());
 	
 
 
