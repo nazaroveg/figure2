@@ -1,10 +1,2 @@
 ﻿  figure2.cpp
-C:\Users\nemez\source\repos\figure2\figure2.cpp(133,1): error C2504: Parallelogram: не определен базовый класс
-C:\Users\nemez\source\repos\figure2\figure2.cpp(135,47): error C2065: corner_a: необъявленный идентификатор
-C:\Users\nemez\source\repos\figure2\figure2.cpp(135,62): error C2065: corner_b: необъявленный идентификатор
-C:\Users\nemez\source\repos\figure2\figure2.cpp(135,77): error C2065: Length_a: необъявленный идентификатор
-C:\Users\nemez\source\repos\figure2\figure2.cpp(135,91): error C2065: Length_b: необъявленный идентификатор
-C:\Users\nemez\source\repos\figure2\figure2.cpp(135,33): error C2614: Rectangle: недопустимая инициализация члена: "Parallelogram" не является базовым классом или членом
-C:\Users\nemez\source\repos\figure2\figure2.cpp(137,38): error C2614: Rectangle: недопустимая инициализация члена: "Parallelogram" не является базовым классом или членом
-C:\Users\nemez\source\repos\figure2\figure2.cpp(222,5): error C2039: "print_info": не является членом "Rectangle".
-C:\Users\nemez\source\repos\figure2\figure2.cpp(132): message : см. объявление "Rectangle"
+  figure2.vcxproj -> C:\Users\newya\source\repos\figure2\x64\Debug\figure2.exe

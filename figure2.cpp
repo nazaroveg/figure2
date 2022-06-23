@@ -129,36 +129,9 @@ protected:
 
 };
 
-class Rectangle : public Parallelogram //Прямоугольник  углы равны
-{
-public:
-	Rectangle(const int a, int b) :Parallelogram(corner_a = 90, corner_b = 90, Length_a = a, Length_b = b) {} //--
-
-	Rectangle(const std::string& name) :Parallelogram(name) {}
 
 
-	std::string name = { "Прямоугольник:" };
 
-	std::string get_name() const
-	{
-		return name;
-	}
-
-private:
-
-protected:
-
-};
-
-class Square  //Квадрат  рано всё
-{
-public:
-
-private:
-
-protected:
-
-};
 class Parallelogram : public Quadrilateral //Параллелограмм четугол попарно равны кривой от 4 уол
 {
 public:
@@ -182,10 +155,60 @@ private:
 protected:
 
 };
-
-class Rhombus  //Ромб   пар все стороны равны
+class Rectangle : public Parallelogram //Прямоугольник  углы равны
 {
 public:
+	Rectangle(const int a, int b) :Parallelogram(corner_a = 90, corner_b = 90, Length_a = a, Length_b = b) {} 
+
+	Rectangle(const std::string& name) :Parallelogram(name) {}
+
+
+	std::string name = { "Прямоугольник:" };
+
+	std::string get_name() const
+	{
+		return name;
+	}
+
+private:
+
+protected:
+
+};
+
+class Square : public Rectangle  //Квадрат  рано всё
+{
+public:
+	Square (const int a) : Rectangle (Length_a = a, Length_b = a) {}
+	Square(const std::string& name) :Rectangle(name) {}
+
+	std::string name = { "Квадрат:" };
+
+	std::string get_name() const
+	{
+		return name;
+	}
+
+private:
+
+protected:
+
+};
+
+
+class Rhombus : public Parallelogram //Ромб   пар все стороны равны
+{
+public:
+	Rhombus(const int A, int B, int a) :Parallelogram(corner_a = A, corner_b = B, Length_a = a, Length_b = a) {}
+
+	Rhombus(const std::string& name) :Parallelogram(name) {}
+
+	std::string name = { "Ромб:" };
+
+	std::string get_name() const
+	{
+		return name;
+	}
 
 private:
 
@@ -208,9 +231,9 @@ int main()
 	Equilateral_triangle Et{ 60,30 };
 	Quadrilateral Ql{ 50,60,70,80,10,20,30,40 };
 	Rectangle Re{ 20,30 };
-	Square Sq;
+	Square Sq {20};
 	Parallelogram Pl{ 30, 40, 20, 30 };
-	Rhombus Rh;
+	Rhombus Rh {30,40,30};
 
 
 	tr.print_info(&tr, tr.get_name());
@@ -220,8 +243,8 @@ int main()
 	Ql.print_info(&Ql, Ql.get_name());
 	Pl.print_info(&Pl, Pl.get_name());
 	Re.print_info(&Re, Re.get_name());
-
-	
+	Sq.print_info(&Sq, Sq.get_name());
+	Rh.print_info(&Rh, Rh.get_name());
 }
 
 
