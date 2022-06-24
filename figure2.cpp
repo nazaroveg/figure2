@@ -4,35 +4,36 @@
 #include <iostream>
 #include <string>
 
-class triangle  //треугольник
+
+class figure
 {
-public:
-	triangle(const std::string& name) { }
-	triangle(int A, int B, int C, int a, int b, int c) : corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {  }
-	triangle(int A, int B, int C, int D, int a, int b, int c, int d) : corner_a(A), corner_b(B), corner_c(C), corner_d(D), Length_a(a), Length_b(b), Length_c(c), Length_d(d) {}
-
-
-
-	std::string get_name() const
+	public:
+		figure(int A, int B, int C, int a, int b, int c) : corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {  } //3
+		figure(int A, int B, int C, int D, int a, int b, int c, int d) : corner_a(A), corner_b(B), corner_c(C), corner_d(D), Length_a(a), Length_b(b), Length_c(c), Length_d(d) {}  //4
+		figure(const std::string& name) { }
+		
+		
+		void print_info(figure* res, std::string name) const
+		{
+			if (corner_d == 0 && Length_d == 0)
+			{
+				std::cout << name << std::endl;
+				std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << std::endl;
+				std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << "\n" << std::endl;
+			}
+			else
+			{
+				std::cout << name << std::endl;
+				std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << "d=" << Length_d << std::endl;
+				std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << " " << "D=" << corner_d << "\n" << std::endl;
+			}
+		}
+		std::string get_name() const
 	{
 		return name;
 	}
 
-	void print_info(triangle* res, std::string name) const
-	{
-		if (corner_d == 0 && Length_d == 0)
-		{
-			std::cout << name << std::endl;
-			std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << std::endl;
-			std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << "\n" << std::endl;
-		}
-		else
-		{
-			std::cout << name << std::endl;
-			std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << "d=" << Length_d << std::endl;
-			std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << " " << "D=" << corner_d << "\n" << std::endl;
-		}
-	}
+
 
 
 private:
@@ -40,8 +41,34 @@ private:
 protected:
 	int corner_a = 0, corner_b = 0, corner_c = 0, corner_d = 0;
 	int Length_a = 0, Length_b = 0, Length_c = 0, Length_d = 0;
+	std::string name = { };
+
+	
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+class triangle : public figure //треугольник
+{
+public:
+	triangle(const std::string& name) : figure(name) { }
+	triangle(int A, int B, int C, int a, int b, int c) : figure (corner_a = A, corner_b = B, corner_c = C, Length_a = a, Length_b = b, Length_c = c) {  }
+	
+
 	std::string name = { "Треугольник:" };
 
+	std::string get_name() const
+	{
+		return name;
+	}
+
+	
+private:
+
+protected:
+	
 };
 
 class Right_triangle : public triangle  // прямоугольный треугольник  один 90 гр
@@ -102,17 +129,22 @@ protected:
 
 };
 
-class Quadrilateral : public triangle //Четырёхугольник  все !=
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+class Quadrilateral : public figure  //Четырёхугольник  все !=
 {
 public:
-	Quadrilateral(const int A, int B, int C, int D, int a, int b, int c, int d) : triangle(corner_a = A, corner_b = B, corner_c = C, corner_d = D,
-		Length_a = a, Length_b = b, Length_c = c, Length_d = d) {}
-	Quadrilateral(const std::string& name) : triangle(name) {}
 	
-
-
-
-
+	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d) : figure (corner_a = A, corner_b = B, corner_c = C, corner_d = D,
+		Length_a = a, Length_b = b, Length_c = c, Length_d = d) {}
+	
+	Quadrilateral(const std::string& name) : figure (name) {}
+	
+	
+	
+	
 
 
 	std::string name = { "Четырёхугольник:" };
@@ -126,7 +158,7 @@ public:
 private:
 
 protected:
-
+	
 };
 
 
