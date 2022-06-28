@@ -8,41 +8,21 @@
 class figure
 {
 	public:
-		figure(int A, int B, int C, int a, int b, int c) : corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {  } //3
-		figure(int A, int B, int C, int D, int a, int b, int c, int d) : corner_a(A), corner_b(B), corner_c(C), corner_d(D), Length_a(a), Length_b(b), Length_c(c), Length_d(d) {}  //4
-		figure(const std::string& name) { }
+		figure(int _sides_count = 0, std::string _name = "Фигура") : sides_count(_sides_count), name(_name) { }
 		
-		
-		void print_info(figure* res, std::string name) const
+				
+		void print_info( ) const
 		{
-			if (corner_d == 0 && Length_d == 0)
-			{
-				std::cout << name << std::endl;
-				std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << std::endl;
-				std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << "\n" << std::endl;
-			}
-			else
-			{
-				std::cout << name << std::endl;
-				std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << "d=" << Length_d << std::endl;
-				std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << " " << "D=" << corner_d << "\n" << std::endl;
-			}
+
+			std::cout << name << std::endl;
+			std::cout <<"число сторон: " << sides_count << std::endl;
 		}
-		std::string get_name() const
-	{
-		return name;
-	}
-
-
-
 
 private:
 
 protected:
-	int corner_a = 0, corner_b = 0, corner_c = 0, corner_d = 0;
-	int Length_a = 0, Length_b = 0, Length_c = 0, Length_d = 0;
 	std::string name = { };
-
+	int sides_count = 0;
 	
 };
 
@@ -53,37 +33,28 @@ protected:
 class triangle : public figure //треугольник
 {
 public:
-	triangle(const std::string& name) : figure(name) { }
-	triangle(int A, int B, int C, int a, int b, int c) : figure (corner_a = A, corner_b = B, corner_c = C, Length_a = a, Length_b = b, Length_c = c) {  }
+	triangle(int A, int B, int C, int a, int b, int c, std::string name = "Треугольник") : figure(3, name), corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {}
 	
-
-	std::string name = { "Треугольник:" };
-
-	std::string get_name() const
+	void print(figure* res)
 	{
-		return name;
+		std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << std::endl;
+		std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << "\n" << std::endl;
 	}
-
+	
 	
 private:
 
 protected:
+	int corner_a = 0, corner_b = 0, corner_c = 0;
+	int Length_a = 0, Length_b = 0, Length_c = 0;
 	
 };
 
 class Right_triangle : public triangle  // прямоугольный треугольник  один 90 гр
 {
 public:
-
-	Right_triangle(const int A, int B, int a, int b, int c) : triangle(corner_a = A, corner_b = B, corner_c = 90, Length_a = a, Length_b = b, Length_c = c) {}
-	Right_triangle(const std::string& name) : triangle(name) {}
-
-	std::string name = { "прямоугольный треугольник:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
+	Right_triangle(int A, int B, int a, int b, int c) : triangle(A, B, 90, a, b, c, "Прямоугольный треугольник") { }
+	
 private:
 
 protected:
@@ -92,17 +63,8 @@ protected:
 class Isosceles_triangle : public triangle  //Равнобедренный треугольник 2 ст =
 {
 public:
-	Isosceles_triangle(const int A, int B, int a, int b) : triangle(corner_a = A, corner_b = B, corner_c = A, Length_a = a, Length_b = b, Length_c = a) {}
-	Isosceles_triangle(const std::string& name) : triangle(name) {}
-
-
-	std::string name = { "Равнобедренный треугольник:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
-
+	Isosceles_triangle(int A, int B, int a, int b) : triangle( A,  B,  A,  a,  b,  a, "Равнобедренный треугольник") {}
+	
 
 private:
 
@@ -112,9 +74,8 @@ protected:
 class Equilateral_triangle : public triangle //Равносторонний треугольник  всё равно
 {
 public:
-	Equilateral_triangle(const int A, int a) : triangle(corner_a = A, corner_b = A, corner_c = A, Length_a = a, Length_b = a, Length_c = a) {}
-	Equilateral_triangle(const std::string& name) : triangle(name) {}
-
+	Equilateral_triangle( int A, int a) : triangle( A,  A,  A,  a,  a,  a, "Равносторонний треугольник") {  }
+	
 
 	std::string name = { "Равносторонний треугольник:" };
 
@@ -137,28 +98,18 @@ class Quadrilateral : public figure  //Четырёхугольник  все !=
 {
 public:
 	
-	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d) : figure (corner_a = A, corner_b = B, corner_c = C, corner_d = D,
-		Length_a = a, Length_b = b, Length_c = c, Length_d = d) {}
-	
-	Quadrilateral(const std::string& name) : figure (name) {}
+	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d, std::string name = "Четырёхугольник") : figure (4, name), corner_a(A), corner_b(B), corner_c(C), corner_d(D), Length_a(a), Length_b(b), Length_c(c), Length_d(d)  {}
 	
 	
 	
 	
-
-
-	std::string name = { "Четырёхугольник:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
-
+	
 
 private:
 
 protected:
-	
+	int corner_a = 0, corner_b = 0, corner_c = 0, corner_d = 0;
+	int Length_a = 0, Length_b = 0, Length_c = 0, Length_d = 0;
 };
 
 
@@ -168,20 +119,9 @@ class Parallelogram : public Quadrilateral //Параллелограмм чет
 {
 public:
 
-	Parallelogram(const int A, int B, int a, int b) : Quadrilateral(corner_a = A, corner_b = B, corner_c = A, corner_d = B,
-		Length_a = a, Length_b = b, Length_c = a, Length_d = b) {}
+	Parallelogram( int A, int B, int a, int b) : Quadrilateral( A,  B,  A,  B,	 a,  b,  a,  b, "Параллелограмм:") {}
 
-	Parallelogram(const std::string& name) : Quadrilateral(name) {}
-
-
-	std::string name = { "Параллелограмм:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
-
-
+	
 private:
 
 protected:
@@ -190,17 +130,9 @@ protected:
 class Rectangle : public Parallelogram //Прямоугольник  углы равны
 {
 public:
-	Rectangle(const int a, int b) :Parallelogram(corner_a = 90, corner_b = 90, Length_a = a, Length_b = b) {} 
+	Rectangle(const int a, int b) :Parallelogram(90, 90, a, b, "Прямоугольник:") { }
 
-	Rectangle(const std::string& name) :Parallelogram(name) {}
-
-
-	std::string name = { "Прямоугольник:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
+	
 
 private:
 
@@ -268,15 +200,18 @@ int main()
 	Rhombus Rh {30,40,30};
 
 
-	tr.print_info(&tr, tr.get_name());
-	Rt.print_info(&Rt, Rt.get_name());
-	It.print_info(&It, It.get_name());
-	Et.print_info(&Et, Et.get_name());
+	tr.print_info(),tr.print(&tr);
+	Rt.print_info(), Rt.print(&Rt);
+	It.print_info(), It.print(&It);
+	Et.print_info(), Et.print(&Et);
+	/*
+	
+	
 	Ql.print_info(&Ql, Ql.get_name());
 	Pl.print_info(&Pl, Pl.get_name());
 	Re.print_info(&Re, Re.get_name());
 	Sq.print_info(&Sq, Sq.get_name());
-	Rh.print_info(&Rh, Rh.get_name());
+	Rh.print_info(&Rh, Rh.get_name());*/
 }
 
 
