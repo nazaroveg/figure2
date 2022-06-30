@@ -16,6 +16,7 @@ class figure
 
 			std::cout << name << std::endl;
 			std::cout <<"число сторон: " << sides_count << std::endl;
+			
 		}
 
 private:
@@ -35,8 +36,11 @@ class triangle : public figure //треугольник
 public:
 	triangle(int A, int B, int C, int a, int b, int c, std::string name = "Треугольник") : figure(3, name), corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {}
 	
-	void print(figure* res)
+	void print_info() const
 	{
+
+		std::cout << name << std::endl;
+		std::cout << "число сторон: " << sides_count << std::endl;
 		std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << std::endl;
 		std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << "\n" << std::endl;
 	}
@@ -53,7 +57,7 @@ protected:
 class Right_triangle : public triangle  // прямоугольный треугольник  один 90 гр
 {
 public:
-	Right_triangle(int A, int B, int a, int b, int c) : triangle(A, B, 90, a, b, c, "Прямоугольный треугольник") { }
+	Right_triangle(int A, int B, int a, int b, int c) : triangle   (A, B, 90, a, b, c, "Прямоугольный треугольник") { }
 	
 private:
 
@@ -98,10 +102,18 @@ class Quadrilateral : public figure  //Четырёхугольник  все !=
 {
 public:
 	
-	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d, std::string name = "Четырёхугольник") : figure (4, name), corner_a(A), corner_b(B), corner_c(C), corner_d(D), Length_a(a), Length_b(b), Length_c(c), Length_d(d)  {}
+	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d, std::string name = "Четырёхугольник") : 
+		figure (4, name), corner_a(A), corner_b(B), corner_c(C), corner_d(D), 
+		Length_a(a), Length_b(b), Length_c(c), Length_d(d)  {}
 	
 	
-	
+	void print_info() const
+	{
+		std::cout << name << std::endl;
+		std::cout << "число сторон: " << sides_count << std::endl;
+		std::cout << "Стороны: " << "a=" << Length_a << " " << "b=" << Length_b << " " << "c=" << Length_c << " " << "d=" << Length_d << std::endl;
+		std::cout << "Углы: " << "A=" << corner_a << " " << "B=" << corner_b << " " << "C=" << corner_c << " " << "D=" << corner_d << "\n" << std::endl;
+	}
 	
 	
 
@@ -119,7 +131,7 @@ class Parallelogram : public Quadrilateral //Параллелограмм чет
 {
 public:
 
-	Parallelogram( int A, int B, int a, int b) : Quadrilateral( A,  B,  A,  B,	 a,  b,  a,  b, "Параллелограмм:") {}
+	Parallelogram( int A, int B, int a, int b, std::string name) : Quadrilateral( A,  B,  A,  B, a,  b,  a,  b, "Параллелограмм:") {} 
 
 	
 private:
@@ -130,7 +142,7 @@ protected:
 class Rectangle : public Parallelogram //Прямоугольник  углы равны
 {
 public:
-	Rectangle(const int a, int b) :Parallelogram(90, 90, a, b, "Прямоугольник:") { }
+	Rectangle( int a, int b, std::string name) :Parallelogram(90, 90, a, b, "Прямоугольник:") { }
 
 	
 
@@ -143,15 +155,8 @@ protected:
 class Square : public Rectangle  //Квадрат  рано всё
 {
 public:
-	Square (const int a) : Rectangle (Length_a = a, Length_b = a) {}
-	Square(const std::string& name) :Rectangle(name) {}
-
-	std::string name = { "Квадрат:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
+	Square ( int a) : Rectangle (a, a, "Квадрат:" ) {}
+	
 
 private:
 
@@ -163,16 +168,9 @@ protected:
 class Rhombus : public Parallelogram //Ромб   пар все стороны равны
 {
 public:
-	Rhombus(const int A, int B, int a) :Parallelogram(corner_a = A, corner_b = B, Length_a = a, Length_b = a) {}
+	Rhombus( int A, int B, int a) : Parallelogram( A,  B,  a,  a, "Ромб:") {}
 
-	Rhombus(const std::string& name) :Parallelogram(name) {}
-
-	std::string name = { "Ромб:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
+	
 
 private:
 
@@ -194,24 +192,25 @@ int main()
 	Isosceles_triangle It{ 50, 60, 10, 20 };
 	Equilateral_triangle Et{ 60,30 };
 	Quadrilateral Ql{ 50,60,70,80,10,20,30,40 };
-	Rectangle Re{ 20,30 };
+	Parallelogram Pl{ 30, 40, 20, 30, " "};  ///??
+	Rectangle Re{ 20,30, " "};               //??
+	Rhombus Rh{ 30,40,30 };
 	Square Sq {20};
-	Parallelogram Pl{ 30, 40, 20, 30 };
-	Rhombus Rh {30,40,30};
-
-
-	tr.print_info(),tr.print(&tr);
-	Rt.print_info(), Rt.print(&Rt);
-	It.print_info(), It.print(&It);
-	Et.print_info(), Et.print(&Et);
-	/*
 	
 	
-	Ql.print_info(&Ql, Ql.get_name());
-	Pl.print_info(&Pl, Pl.get_name());
-	Re.print_info(&Re, Re.get_name());
-	Sq.print_info(&Sq, Sq.get_name());
-	Rh.print_info(&Rh, Rh.get_name());*/
+
+
+	tr.print_info();
+	Rt.print_info();
+	It.print_info();
+	Et.print_info();
+	Ql.print_info();
+	Pl.print_info();
+	Re.print_info();
+	Sq.print_info();
+	Rh.print_info();
+		
+	return 0;
 }
 
 
