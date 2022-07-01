@@ -34,7 +34,7 @@ protected:
 class triangle : public figure //треугольник
 {
 public:
-	triangle(int A, int B, int C, int a, int b, int c, std::string name = "Треугольник") : figure(3, name), corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {}
+	triangle(const int A, int B, int C, int a, int b, int c, std::string name = "Треугольник") : figure(3, name), corner_a(A), corner_b(B), corner_c(C), Length_a(a), Length_b(b), Length_c(c) {}
 	
 	void print_info() const
 	{
@@ -57,7 +57,7 @@ protected:
 class Right_triangle : public triangle  // прямоугольный треугольник  один 90 гр
 {
 public:
-	Right_triangle(int A, int B, int a, int b, int c) : triangle   (A, B, 90, a, b, c, "Прямоугольный треугольник") { }
+	Right_triangle(const int A, int B, int a, int b, int c) : triangle   (A, B, 90, a, b, c, "Прямоугольный треугольник") { }
 	
 private:
 
@@ -67,7 +67,7 @@ protected:
 class Isosceles_triangle : public triangle  //Равнобедренный треугольник 2 ст =
 {
 public:
-	Isosceles_triangle(int A, int B, int a, int b) : triangle( A,  B,  A,  a,  b,  a, "Равнобедренный треугольник") {}
+	Isosceles_triangle(const int A, int B, int a, int b) : triangle( A,  B,  A,  a,  b,  a, "Равнобедренный треугольник") {}
 	
 
 private:
@@ -78,15 +78,10 @@ protected:
 class Equilateral_triangle : public triangle //Равносторонний треугольник  всё равно
 {
 public:
-	Equilateral_triangle( int A, int a) : triangle( A,  A,  A,  a,  a,  a, "Равносторонний треугольник") {  }
+	Equilateral_triangle(const int A, int a) : triangle( A,  A,  A,  a,  a,  a, "Равносторонний треугольник") {  }
 	
 
-	std::string name = { "Равносторонний треугольник:" };
-
-	std::string get_name() const
-	{
-		return name;
-	}
+	
 
 private:
 
@@ -102,7 +97,7 @@ class Quadrilateral : public figure  //Четырёхугольник  все !=
 {
 public:
 	
-	Quadrilateral(int A, int B, int C, int D, int a, int b, int c, int d, std::string name = "Четырёхугольник") : 
+	Quadrilateral(const int A, int B, int C, int D, int a, int b, int c, int d, std::string name = "Четырёхугольник") : 
 		figure (4, name), corner_a(A), corner_b(B), corner_c(C), corner_d(D), 
 		Length_a(a), Length_b(b), Length_c(c), Length_d(d)  {}
 	
@@ -131,7 +126,7 @@ class Parallelogram : public Quadrilateral //Параллелограмм чет
 {
 public:
 
-	Parallelogram( int A, int B, int a, int b, std::string name) : Quadrilateral( A,  B,  A,  B, a,  b,  a,  b, "Параллелограмм:") {} 
+	Parallelogram(const int A, int B, int a, int b, std::string name = "Параллелограмм:") : Quadrilateral( A,  B,  A,  B, a,  b,  a,  b, name) {}
 
 	
 private:
@@ -142,7 +137,7 @@ protected:
 class Rectangle : public Parallelogram //Прямоугольник  углы равны
 {
 public:
-	Rectangle( int a, int b, std::string name) :Parallelogram(90, 90, a, b, "Прямоугольник:") { }
+	Rectangle(const int a, int b, std::string name = "Прямоугольник:"  ) :Parallelogram(90, 90, a, b, name) { }
 
 	
 
@@ -155,7 +150,7 @@ protected:
 class Square : public Rectangle  //Квадрат  рано всё
 {
 public:
-	Square ( int a) : Rectangle (a, a, "Квадрат:" ) {}
+	Square (const int a, std::string name = "Квадрат:") : Rectangle (a, a, name ) {}
 	
 
 private:
@@ -168,7 +163,7 @@ protected:
 class Rhombus : public Parallelogram //Ромб   пар все стороны равны
 {
 public:
-	Rhombus( int A, int B, int a) : Parallelogram( A,  B,  a,  a, "Ромб:") {}
+	Rhombus(const int A, int B, int a) : Parallelogram( A,  B,  a,  a, "Ромб:") {}
 
 	
 
@@ -192,8 +187,8 @@ int main()
 	Isosceles_triangle It{ 50, 60, 10, 20 };
 	Equilateral_triangle Et{ 60,30 };
 	Quadrilateral Ql{ 50,60,70,80,10,20,30,40 };
-	Parallelogram Pl{ 30, 40, 20, 30, " "};  ///??
-	Rectangle Re{ 20,30, " "};               //??
+	Parallelogram Pl{ 30, 40, 20, 30};  
+	Rectangle Re{ 20,30};              
 	Rhombus Rh{ 30,40,30 };
 	Square Sq {20};
 	
